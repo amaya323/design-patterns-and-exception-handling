@@ -1,0 +1,27 @@
+#ifndef CARTITEM_H
+#define CARTITEM_H
+
+#include "Product.h"
+
+class CartItem {
+private:
+    Product product;
+    int quantity;
+public:
+    void setProduct(const Product& newProduct) {
+        this->product = newProduct;
+    }
+    void setQuantity(const int& newQuantity) {
+        this->quantity = newQuantity;
+    }
+
+    Product getProduct() const{
+        return product;
+    }
+
+    int getQuantity() const{
+        return quantity;
+    }
+};
+
+#endif // CARTITEM_H
