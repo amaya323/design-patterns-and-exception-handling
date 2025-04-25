@@ -1,28 +1,34 @@
 #pragma once
-#include "Product.h"
+#include "ProductCatalog.h"
 
 class CartItem {
 private:
-    Product product;
+    int productId;
     int quantity;
 
 public:
 
-    CartItem() : product(Product()), quantity(0) {}
-    void setProduct(const Product& newProduct) {
-        this->product = newProduct;
+    void setId(int id) {
+        this->productId = id;
     }
 
     void setQuantity(const int& newQuantity) {
         this->quantity = newQuantity;
     }
 
-    Product getProduct() const{
-        return product;
+    int getId() const{
+        return productId;
     }
 
     int getQuantity() const{
         return quantity;
+    }
+
+    void printItem(){
+        cout << left << setw(12) << catalog.products[productId].getId()
+             << setw(20) << catalog.products[productId].getName()
+             << setw(10) << fixed << setprecision(2) << catalog.products[productId].getPrice()
+             << setw(10) << getQuantity();
     }
 };
 

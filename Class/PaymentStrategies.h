@@ -47,6 +47,7 @@ public:
 class paymentContext {
 private:
     paymentStrategy* strategy;
+
 public:
     paymentContext(paymentStrategy* strategy) {
         this->strategy = strategy;

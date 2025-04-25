@@ -11,7 +11,6 @@ private:
     double price;
 
 public:
-    Product() : id(0), name(""), price(0.0) {}
 
     Product(int id, string name, double price) {
         this->id = id;
@@ -26,7 +25,15 @@ public:
         return name;
     }
 
+    void printProduct(){
+        cout << left << setw(12) << id
+             << setw(20) << name
+             << setw(10) << fixed << setprecision(2) << price
+             << endl;
+    }
+
     double getPrice() {
         return price;
     }
 };
+

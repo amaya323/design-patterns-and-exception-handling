@@ -7,7 +7,8 @@ class ShoppingCart {
 private:
     static ShoppingCart instance;
     CartItem cartItems[10];
-    int itemCount = 0;
+    double total;
+    int itemCount;
     ShoppingCart(): itemCount(0){}
 
 public:
@@ -15,41 +16,25 @@ public:
         return instance;
     }
 
-    void addToCart(const CartItem& item) {
+    void addToCart(int productId, int quantity) {
         for (int i = 0; i < itemCount; i++) {
-            if (cartItems[i].getProduct().getId() == item.getProduct().getId()) {
-                cartItems[i].setQuantity(cartItems[i].getQuantity() + item.getQuantity());
-                return;
+            if (cartItems[i].getId() == productId) {
+                cartItems[i].setQuantity(cartItems[i].getQuantity() + quantity);
             }
         }
 
-        if (itemCount < 10) {
-            cartItems[itemCount] = item;
-            itemCount++;
+        cartItems[itemCount-1].setId(productId);
+        cartItems[itemCount-1].setQuantity(quantity);
+        itemCount++;
+    }
+
+    void calculateTotal() {
+        for (int i = 0; i < itemCount; i++) {
+            total += catalog.products[cartItems[i].getId()].getPrice() * cartItems[i].getQuantity();
         }
     }
 
-    void removeFromCart(const CartItem& item) {
-        for (int i = 0; i < itemCount; i++) {
-            if (cartItems[i].getProduct().getId() == item.getProduct().getId()) {
-                if (cartItems[i].getQuantity() > item.getQuantity()) {
-                    cartItems[i].setQuantity(cartItems[i].getQuantity() - item.getQuantity());
-                } else {
-                    itemCount--;
-                    for (int j = i; j < itemCount; j++) {
-                        cartItems[j] = cartItems[j + 1];
-                    }
-                }
-                return;
-            }
-        }
-    }
-
-    double calculateTotal() {
-        double total = 0;
-        for (int i = 0; i < itemCount; i++) {
-            total += cartItems[i].getProduct().getPrice() * cartItems[i].getQuantity();
-        }
+    double getTotal() {
         return total;
     }
 
@@ -60,17 +45,12 @@ public:
              << setw(10) << "Quantity"
              << endl;
 
-        cout << string(52, '-') << endl; // Print a separator line
+        for (int i = 0; i < itemCount; i++) {
+            cartItems[i].setQuantity(cartItems[i].getQuantity() + quantity);
 
-        for (const auto &item: cartItems) {
-            cout << left << setw(12) << item.getProduct().getId()
-                 << setw(20) << item.getProduct().getName()
-                 << setw(10) << fixed << setprecision(2) << item.getProduct().getPrice()
-                 << setw(10) << item.getQuantity()
-                 << endl;
         }
-        cout << string(52, '-') << endl;
-        cout << "Total: " << calculateTotal() << endl;
+
+        calculateTotal();
     }
 };
 

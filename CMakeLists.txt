@@ -21,6 +21,9 @@ set(HEADER_FILES
         Class/Product.h
         Class/Order.h
         Class/Product.h
+        Class/CartItem.h
+        Class/ProductCatalog.h
+        Class/Function.h
 )
 
 # Create the executable

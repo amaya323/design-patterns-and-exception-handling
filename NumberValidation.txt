@@ -22,3 +22,19 @@ string gcashNumber = 0;
                 cout << endl << "Error: Invalid gcash number." << endl;
             }
         } while (!isContactValid);
+
+
+        void addToCart() {
+                int productId;
+                int quantity;
+                bool isValid = false;
+                productId = getInputInt("Enter product ID: ", 1, 10);
+                quantity = getInputInt("Enter quantity: ");
+
+                for (int i = 0; i < 10; i++) {
+                    if (products[i].getId() == productId) {
+                        cart.addToCart(products[i], quantity);
+                        break;
+                    }
+                }
+            }
