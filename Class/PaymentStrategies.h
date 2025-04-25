@@ -1,0 +1,45 @@
+#pragma once
+
+#include <iostream>
+#include "Logger.h"
+using namespace std;
+
+class paymentStrategy {
+public:
+    virtual void pay(int orderId) = 0;
+    static string message() {
+        return "\nYou have successfully checked out the products!\n";
+    }
+};
+
+class Gcash: public paymentStrategy {
+private:
+    Logger& logger = Logger::getInstance();
+
+public:
+    void pay(int orderId) {
+        logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Gcash");
+        cout<<Gcash::message();
+    }
+};
+
+class CreditDebitCard: public paymentStrategy {
+private:
+    Logger& logger = Logger::getInstance();
+
+public:
+    void pay(int orderId) {
+        logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Credit/Debit Card");
+        cout<<CreditDebitCard::message();
+    }
+};
+
+class Cash: public paymentStrategy {
+private:
+    Logger& logger = Logger::getInstance();
+public:
+    void pay(int orderId) {
+        logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Cash");
+        cout<<Cash::message();
+    }
+};
