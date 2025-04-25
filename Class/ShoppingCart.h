@@ -73,3 +73,5 @@ public:
         cout << "Total: " << calculateTotal() << endl;
     }
 };
+
+ShoppingCart ShoppingCart::instance;
