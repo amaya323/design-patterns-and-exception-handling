@@ -51,7 +51,7 @@ public:
     paymentContext(paymentStrategy* strategy) {
         this->strategy = strategy;
     }
-    void payOrder(int orderId) {
+    void pay(int orderId) {
         strategy->pay(orderId);
     }
 };
