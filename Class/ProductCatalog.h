@@ -1,9 +1,5 @@
 #pragma once
 #include "Product.h"
-#include "ShoppingCart.h"
-#include "Order.h"
-#include "PaymentStrategies.h"
-#include "Function.h"
 
 class ProductCatalog {
 public:

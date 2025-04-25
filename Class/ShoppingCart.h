@@ -2,7 +2,6 @@
 
 #include "CartItem.h"
 
-
 class ShoppingCart {
 private:
     static ShoppingCart instance;
@@ -46,10 +45,8 @@ public:
              << endl;
 
         for (int i = 0; i < itemCount; i++) {
-            cartItems[i].setQuantity(cartItems[i].getQuantity() + quantity);
-
+            cartItems[i].printItem();
         }
-
         calculateTotal();
     }
 };

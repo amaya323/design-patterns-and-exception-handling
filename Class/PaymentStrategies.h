@@ -2,57 +2,79 @@
 
 #include <iostream>
 #include "Logger.h"
+#include "Order.h"
+#include "ShoppingCart.h"
 using namespace std;
 
-class paymentStrategy {
+class PaymentStrategy {
 public:
     virtual void pay(int orderId) = 0;
+    virtual string getPaymentMethod() = 0;
     static string message() {
         return "\nYou have successfully checked out the products!\n";
     }
+
 };
 
-class Gcash: public paymentStrategy {
+class Gcash: public PaymentStrategy {
 private:
     Logger& logger = Logger::getInstance();
 
 public:
-    void pay(int orderId) {
+    void pay(int orderId) override{
         logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Gcash");
         cout<<Gcash::message();
     }
+
+    string getPaymentMethod() override {
+        return "Gcash";
+    }
 };
 
-class CreditDebitCard: public paymentStrategy {
+class CreditDebitCard: public PaymentStrategy {
 private:
     Logger& logger = Logger::getInstance();
 
 public:
-    void pay(int orderId) {
+    void pay(int orderId) override{
         logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Credit/Debit Card");
         cout<<CreditDebitCard::message();
     }
+
+    string getPaymentMethod() override {
+        return "Credit/Debit Card";
+    }
 };
 
-class Cash: public paymentStrategy {
+class Cash: public PaymentStrategy {
 private:
     Logger& logger = Logger::getInstance();
 public:
-    void pay(int orderId) {
+    void pay(int orderId) override{
         logger.logOrder("Order ID:" + to_string(orderId) + " has been successfully checked out and paid using Cash");
         cout<<Cash::message();
     }
+
+    string getPaymentMethod() override {
+        return "Cash";
+    }
+
 };
 
 class paymentContext {
 private:
-    paymentStrategy* strategy;
+    PaymentStrategy* strategy;
 
 public:
-    paymentContext(paymentStrategy* strategy) {
-        this->strategy = strategy;
+    void setPaymentMethod(PaymentStrategy* paymentStarategy) {
+        this->strategy = paymentStarategy;
     }
+
     void payOrder(int orderId) {
         strategy->pay(orderId);
+    }
+
+    string getPaymentMethod() {
+        return strategy->getPaymentMethod();
     }
 };

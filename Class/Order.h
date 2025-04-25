@@ -12,11 +12,14 @@ private:
     string paymentMethod;
     int orderId;
 public:
-    Order(int orderId, CartItem order, double total, string paymentMethod){
+
+    Order(int orderId, CartItem items[], double total, string paymentMethod){
         this->orderId = orderId;
         this->cartItems[orderId-1] = order;
         this->total = total;
         this->paymentMethod = paymentMethod;
+
+
     }
 
     void print() {
@@ -41,3 +44,4 @@ public:
 
     }
 };
+

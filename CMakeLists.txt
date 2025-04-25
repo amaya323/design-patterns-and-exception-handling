@@ -24,6 +24,7 @@ set(HEADER_FILES
         Class/CartItem.h
         Class/ProductCatalog.h
         Class/Function.h
+        Class/Shop.h
 )
 
 # Create the executable

@@ -57,13 +57,16 @@ int getInputInt(string prompt) {
 }
 
 //Asks the user a Yes/No question and validates input
-void askYesOrNo(string question, char &yOrN) {
+bool askYesOrNo(string question) {
     string placeholder;
+    char yOrN;
     do {
         cout << endl << question; //Print the question
         getline(cin, placeholder); //Get user input
         yOrN = tolower(placeholder[0]);
     } while (placeholder.length() != 1 || (yOrN != 'y' && yOrN != 'n')); //Loop until the input is valid
+
+    return (yOrN == 'y');
 }
 
 
