@@ -11,29 +11,41 @@ private:
     ShoppingCart(): itemCount(0){}
 
 public:
+    CartItem* getShoppingCartItems() {
+        return cartItems;
+    }
+
+    int getItemCount() const {
+        return itemCount;
+    }
+
     static ShoppingCart& getInstance() {
         return instance;
     }
 
-    void addToCart(int productId, int quantity) {
+    void addToCart(int productIndex, int quantity) {
+        bool isFound = false;
         for (int i = 0; i < itemCount; i++) {
-            if (cartItems[i].getId() == productId) {
+            if (cartItems[i].getIndex() == productIndex) {
                 cartItems[i].setQuantity(cartItems[i].getQuantity() + quantity);
+                isFound = true;
             }
         }
 
-        cartItems[itemCount-1].setId(productId);
-        cartItems[itemCount-1].setQuantity(quantity);
-        itemCount++;
+        if (!isFound) {
+            cartItems[itemCount].setIndex(productIndex);
+            cartItems[itemCount].setQuantity(quantity);
+            itemCount++;
+        }
     }
 
     void calculateTotal() {
         for (int i = 0; i < itemCount; i++) {
-            total += catalog.products[cartItems[i].getId()].getPrice() * cartItems[i].getQuantity();
+            total += catalog.products[cartItems[i].getIndex()].getPrice() * cartItems[i].getQuantity();
         }
     }
 
-    double getTotal() {
+    double getTotal() const {
         return total;
     }
 

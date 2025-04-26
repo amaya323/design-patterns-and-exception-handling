@@ -38,3 +38,12 @@ string gcashNumber = 0;
                     }
                 }
             }
+            //Function to return string with characters in all uppercase
+            string toUpperCase(string str) {
+                for (char &c: str) { //Iterate through the string
+                    if (isalpha(c)) { //Check if the character is a letter
+                        c = toupper(c); //Convert the character to uppercase
+                    }
+                }
+                return str;
+            }

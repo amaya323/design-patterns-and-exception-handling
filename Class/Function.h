@@ -8,7 +8,7 @@ void printTitle(const string &title) {
     int length = title.length(); //Get the length of the title
     int padding = max(10, 30 - length); //Calculate padding
     string border(padding, '=');
-    cout << "\n" << border << " " << title << " " << border << "\n" << endl; //Print the title
+    cout << "\n" << border << " " << title << " " << border << "\n" ; //Print the title
 }
 
 //Function to get string input of user
@@ -20,10 +20,11 @@ string getInput(string prompt) {
 }
 
 int getInputInt(string prompt, int minVal, int maxVal) {
-    string input = getInput(prompt);
+    string input;
     int output;
     bool isValid = false;
     do {
+        input = getInput(prompt);
         try{
             output = stoi(input);
             if (output < minVal || output > maxVal) { //Check if the input is out of range
@@ -40,12 +41,16 @@ int getInputInt(string prompt, int minVal, int maxVal) {
 }
 
 int getInputInt(string prompt) {
-    string input = getInput(prompt);
+    string input;
     int output;
     bool isValid = false;
     do {
+        input = getInput(prompt);
         try{
             output = stoi(input);
+            if (output < 0) {
+                throw out_of_range("Please input a value greater than 0.");
+            }
             isValid = true;
         }catch (invalid_argument& e) {
             cout << "Error: Please enter a valid number." << endl << endl;

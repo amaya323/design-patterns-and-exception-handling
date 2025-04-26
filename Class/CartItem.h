@@ -3,21 +3,21 @@
 
 class CartItem {
 private:
-    int productId;
+    int productIndex;
     int quantity;
 
 public:
 
-    void setId(int id) {
-        this->productId = id;
+    void setIndex(int index) {
+        this->productIndex = index;
     }
 
     void setQuantity(const int& newQuantity) {
         this->quantity = newQuantity;
     }
 
-    int getId() const{
-        return productId;
+    int getIndex() const{
+        return productIndex;
     }
 
     int getQuantity() const{
@@ -25,10 +25,10 @@ public:
     }
 
     void printItem(){
-        cout << left << setw(12) << catalog.products[productId].getId()
-             << setw(20) << catalog.products[productId].getName()
-             << setw(10) << fixed << setprecision(2) << catalog.products[productId].getPrice()
-             << setw(10) << getQuantity();
+        cout << left << setw(12) << catalog.products[productIndex].getId()
+             << setw(20) << catalog.products[productIndex].getName()
+             << setw(10) << fixed << setprecision(2) << catalog.products[productIndex].getPrice()
+             << setw(10) << getQuantity() << endl;
     }
 };
 

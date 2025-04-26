@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 #include "CartItem.h"
 using namespace std;
@@ -11,22 +10,25 @@ private:
     double total;
     string paymentMethod;
     int orderId;
+    int cartItemCount;
 public:
 
-    Order(int orderId, CartItem items[], double total, string paymentMethod){
+    Order(const int orderId, const CartItem* items, const int itemCount, const double total, const string &paymentMethod){
         this->orderId = orderId;
-        this->cartItems[orderId-1] = order;
         this->total = total;
         this->paymentMethod = paymentMethod;
+        this->cartItemCount = itemCount;
 
-
+        for (int i = 0; i < cartItemCount; i++) {
+            cartItems[i] = items[i];
+        }
     }
 
-    void print() {
+    void printOrder() {
         cout << "Order ID: " << orderId << endl;
-        cout << fixed << setprecision(2) << total;
+        cout << fixed << setprecision(2) << total << endl;
         cout << "Payment Method: " << paymentMethod << endl;
-        cout << "Order Details: ";
+        cout << "Order Details: " << endl;
 
         cout << left << setw(12) << "Product ID"
              << setw(20) << "Name"
@@ -34,14 +36,9 @@ public:
              << setw(10) << "Quantity"
              << endl;
 
-        for (CartItem item: cartItems) {
-            item.printItem();
-            cout << endl;
+        for (int i = 0; i < cartItemCount; i++) {  // Only print actual items
+            cartItems[i].printItem();
         }
-
-    }
-    ~Order() {
-
     }
 };
 
