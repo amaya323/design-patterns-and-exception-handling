@@ -9,7 +9,7 @@
 class Shop {
 private:
     Order*orders[10] = {};
-    ShoppingCart& cart = ShoppingCart::getInstance();
+    ShoppingCart cart;
     int orderCount = 0;
 
 public:

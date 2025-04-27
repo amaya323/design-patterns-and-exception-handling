@@ -26,7 +26,7 @@ public:
 
     void printOrder() {
         cout << "Order ID: " << orderId << endl;
-        cout << fixed << setprecision(2) << total << endl;
+        cout << "Total: " << fixed << setprecision(2) << total << endl;
         cout << "Payment Method: " << paymentMethod << endl;
         cout << "Order Details: " << endl;
 

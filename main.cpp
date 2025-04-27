@@ -1,7 +1,6 @@
 #include "Class/Shop.h"
 
 int main() {
-    ShoppingCart &cart = cart.getInstance();
     Shop shop;
     int choice;
 
@@ -28,6 +27,5 @@ int main() {
         system("pause");
 
     }while (choice != 4);
-
 
 }

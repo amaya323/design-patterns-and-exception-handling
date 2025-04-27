@@ -4,11 +4,9 @@
 
 class ShoppingCart {
 private:
-    static ShoppingCart instance;
     CartItem cartItems[10];
-    double total;
-    int itemCount;
-    ShoppingCart(): itemCount(0){}
+    double total = 0.0;
+    int itemCount = 0;
 
 public:
     CartItem* getShoppingCartItems() {
@@ -25,10 +23,6 @@ public:
         }
         total = 0.0;
         itemCount = 0;
-    }
-
-    static ShoppingCart& getInstance() {
-        return instance;
     }
 
     void addToCart(int productIndex, int quantity) {
@@ -48,6 +42,7 @@ public:
     }
 
     void calculateTotal() {
+        total = 0;
         for (int i = 0; i < itemCount; i++) {
             total += catalog.getProduct(cartItems[i].getIndex()).getPrice() * cartItems[i].getQuantity();
         }
@@ -70,5 +65,3 @@ public:
         }
     }
 };
-
-ShoppingCart ShoppingCart::instance;

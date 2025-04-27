@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/balio/design-patterns-and-exception-handling/main.cpp" "CMakeFiles/E_Commerce.dir/main.cpp.obj" "gcc" "CMakeFiles/E_Commerce.dir/main.cpp.obj.d"
+  "C:/Users/Amaya/design-patterns-and-exception-handling/main.cpp" "CMakeFiles/E_Commerce.dir/main.cpp.obj" "gcc" "CMakeFiles/E_Commerce.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
