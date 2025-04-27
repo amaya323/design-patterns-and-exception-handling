@@ -8,9 +8,12 @@
 
 class Shop {
 private:
+    Logger &log = Logger::getInstance();
     Order*orders[10] = {};
     ShoppingCart cart;
     int orderCount = 0;
+    int orderNumber;
+
 
 public:
     void viewCart() {
@@ -72,8 +75,8 @@ public:
         printTitle("Orders");
 
         try {
-            if (orderCount <= 0) {
-                throw std::runtime_error("No orders found.");
+            if (orderCount == 0) {
+                throw runtime_error("No orders found.");
             }
             for (int i = 0; i < orderCount; i++) {
                 orders[i]->printOrder();
@@ -111,11 +114,10 @@ private:
             default:
                 break;
         }
-
-        orders[orderCount] = new Order(orderCount + 1, cart.getShoppingCartItems(), cart.getItemCount(),cart.getTotal(), payment.getPaymentMethod());
-
-        payment.payOrder(orderCount + 1);
+        orderNumber = log.getOrderCount();
+        orders[orderCount] = new Order(orderNumber + 1, cart.getShoppingCartItems(), cart.getItemCount(),cart.getTotal(), payment.getPaymentMethod());
         orderCount++;
+        payment.payOrder(orderCount + 1);
         cart.clearCart();
     }
 

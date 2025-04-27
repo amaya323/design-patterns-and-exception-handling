@@ -9,7 +9,7 @@ private:
     static Logger instance;
     FILE* log;
     Logger() {
-        log = fopen("../Log.txt", "a");
+        log = fopen("../Log.txt", "a+");
     }
 
 public:
@@ -18,8 +18,20 @@ public:
         fputs("\n", log);
 
     }
+
     static Logger& getInstance() {
         return instance;
+    }
+
+    int getOrderCount() {
+        int numberOfLines = 0;
+        char c;
+        while ((c = fgetc(log)) != EOF) {
+            if (c == '\n') {
+                numberOfLines++;
+            }
+        }
+        return numberOfLines;
     }
 
     ~Logger() {
