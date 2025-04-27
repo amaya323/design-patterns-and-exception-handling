@@ -25,9 +25,9 @@ public:
     }
 
     void printItem(){
-        cout << left << setw(12) << catalog.products[productIndex].getId()
-             << setw(20) << catalog.products[productIndex].getName()
-             << setw(10) << fixed << setprecision(2) << catalog.products[productIndex].getPrice()
+        cout << left << setw(12) << catalog.getProduct(productIndex).getId()
+             << setw(20) << catalog.getProduct(productIndex).getName()
+             << setw(10) << fixed << setprecision(2) << catalog.getProduct(productIndex).getPrice()
              << setw(10) << getQuantity() << endl;
     }
 };

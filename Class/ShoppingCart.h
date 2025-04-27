@@ -19,6 +19,14 @@ public:
         return itemCount;
     }
 
+    void clearCart () {
+        for (int i = 0; i < itemCount; i++) {
+            cartItems[i] = CartItem();
+        }
+        total = 0.0;
+        itemCount = 0;
+    }
+
     static ShoppingCart& getInstance() {
         return instance;
     }
@@ -41,11 +49,12 @@ public:
 
     void calculateTotal() {
         for (int i = 0; i < itemCount; i++) {
-            total += catalog.products[cartItems[i].getIndex()].getPrice() * cartItems[i].getQuantity();
+            total += catalog.getProduct(cartItems[i].getIndex()).getPrice() * cartItems[i].getQuantity();
         }
     }
 
-    double getTotal() const {
+    double getTotal() {
+        calculateTotal();
         return total;
     }
 
@@ -59,7 +68,6 @@ public:
         for (int i = 0; i < itemCount; i++) {
             cartItems[i].printItem();
         }
-        calculateTotal();
     }
 };
 

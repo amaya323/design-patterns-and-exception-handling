@@ -15,39 +15,15 @@ private:
 public:
     void viewCart() {
         printTitle ("Shopping Cart");
-        cart.printCart();
-        bool checkout = askYesOrNo("Do you want to checkout all the products? (y/n): ");
-        if (checkout) {
-            printTitle("Checkout");
+
+        if (cart.getItemCount() == 0) {
+            cout << "There are no items in the shopping cart." << endl << endl;;
+        }else {
             cart.printCart();
-            cout << "Total: " << fixed << setprecision(2) << cart.getTotal() << endl << endl;
-
-            int paymentMethod;
-            cout << "Select payment method: " << endl;
-            cout << "\t[1] Cash" << endl;
-            cout << "\t[2] Credit / Debit Card" << endl;
-            cout << "\t[3] Gcash" << endl;
-            paymentMethod = getInputInt("Enter payment method: ", 1, 3);
-
-            PaymentContext payment;
-            switch (paymentMethod) {
-                case 1:
-                    payment.setPaymentMethod(new Cash());
-                    break;
-                case 2:
-                    payment.setPaymentMethod(new CreditDebitCard());
-                    break;
-                case 3:
-                    payment.setPaymentMethod(new Gcash());
-                    break;
-                default:
-                    break;
+            bool checkout = askYesOrNo("Do you want to checkout all the products? (y/n): ");
+            if (checkout) {
+                checkoutCart();
             }
-
-            orders[orderCount] = new Order(orderCount + 1, cart.getShoppingCartItems(), cart.getItemCount(),cart.getTotal(), payment.getPaymentMethod());
-
-            payment.payOrder(orderCount + 1);
-            orderCount++;
         }
     }
 
@@ -61,7 +37,7 @@ public:
              << setw(10) << "Price"
              << endl;
             for (int i = 0; i < 10; i++) {
-                catalog.products[i].printProduct();
+                catalog.getProduct(i).printProduct();
             }
             cout << endl;
 
@@ -107,4 +83,40 @@ public:
             cout << "Error: " << e.what() << endl << endl;
         }
     }
+
+private:
+    void checkoutCart() {
+        printTitle("Checkout");
+        cart.printCart();
+        cout << "Total: " << fixed << setprecision(2) << cart.getTotal() << endl << endl;
+
+        int paymentMethod;
+        cout << "Select payment method: " << endl;
+        cout << "\t[1] Cash" << endl;
+        cout << "\t[2] Credit / Debit Card" << endl;
+        cout << "\t[3] Gcash" << endl;
+        paymentMethod = getInputInt("Enter payment method: ", 1, 3);
+
+        PaymentContext payment;
+        switch (paymentMethod) {
+            case 1:
+                payment.setPaymentMethod(new Cash());
+            break;
+            case 2:
+                payment.setPaymentMethod(new CreditDebitCard());
+            break;
+            case 3:
+                payment.setPaymentMethod(new Gcash());
+            break;
+            default:
+                break;
+        }
+
+        orders[orderCount] = new Order(orderCount + 1, cart.getShoppingCartItems(), cart.getItemCount(),cart.getTotal(), payment.getPaymentMethod());
+
+        payment.payOrder(orderCount + 1);
+        orderCount++;
+        cart.clearCart();
+    }
+
 };

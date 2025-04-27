@@ -2,7 +2,8 @@
 #include "Product.h"
 
 class ProductCatalog {
-public:
+    private:
+    // lists of products
     Product products [10] = {
             {"A1", "Laptop", 999.99},
             {"B2", "Mouse", 19.99},
@@ -15,18 +16,31 @@ public:
             {"I9", "Wireless Router", 89.99},
             {"J10", "Bluetooth Speaker", 39.99}
     };
+    public:
+
+    Product getProduct(int index) {
+        return products[index];
+    }
 
     int getIndex(string productId) {
-        for (int i = 0; i < 10; i++) {
-            if (productId == products[i].getId()) {
-                return i;
+        //convert to uppercase all letter
+        for (char &c: productId) {
+            if (isalpha(c)) {
+                c = toupper(c);
             }
         }
-        throw runtime_error("Product not found!");
+        // iterate through the product catalog and check if the product exists
+        for (int i = 0; i < 10; i++) {
+            if (productId == products[i].getId()) {
+                return i; // return the index of the product if found
+            }
+        }
+        throw runtime_error("Product not found!"); // throw error if not found
     }
 
 };
 
+// global product
 ProductCatalog catalog;
 
 
